@@ -1,0 +1,91 @@
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.3em;
+  font-size: 14px;
+}
+
+
+.trello-master{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 40px 50px  1fr;
+
+  background-color: greenyellow;
+
+  
+}
+.navbar-app{
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  background-color: green;
+  font-size: 1.5rem;
+  
+  
+  
+
+}
+.navbar-board{
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  background-color: greenyellow;
+  font-size: 1.1rem;
+}
+.board-columns{
+  display: flex;
+  overflow-x:auto ;
+}
+.photo{
+  height: 70px;
+  width: 200px;
+}
+.column{
+  flex:0 0 auto;
+  width: 200px;
+  height: calc(100%-10px);
+  
+
+  
+}
+.column > *{
+  background-color: white;
+  color: black;
+  padding: 0 8px;
+}
+header{
+  padding-left: 15px;
+  height: 36px;
+  line-height: 36px;
+  font-size:16px;
+  font-weight: bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+footer{
+  padding-left: 5px;
+  height: 36px;
+  line-height: 36px;
+  
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+ul{
+  list-style-type: none;
+  margin: 0;
+  max-height: calc(100%-36px-36px); /*100% cua phan tu cha tuc la chieu cao cua column - chieu cao header- chieu cao footer la ra chieu cao ul*/
+  overflow-y: auto;
+  
+}
+li{
+  background-color: white;
+  padding: 10px;
+
+}
