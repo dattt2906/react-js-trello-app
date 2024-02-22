@@ -23,10 +23,13 @@ body {
 }
 .navbar-app{
   padding-left: 10px;
-  display: flex;
-  align-items: center;
+ 
   background-color: green;
   font-size: 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  
   
   
   
@@ -46,6 +49,9 @@ body {
 .photo{
   height: 70px;
   width: 200px;
+  display: block;
+  
+  
 }
 .column{
   flex:0 0 auto;
@@ -56,9 +62,10 @@ body {
   
 }
 .column > *{
-  background-color: white;
+  background-color: whitesmoke;
   color: black;
   padding: 0 8px;
+  margin-left:15px ;
 }
 header{
   padding-left: 15px;
@@ -70,7 +77,7 @@ header{
   border-top-right-radius: 5px;
 }
 footer{
-  padding-left: 5px;
+  padding-left: 15px;
   height: 36px;
   line-height: 36px;
   
@@ -83,9 +90,14 @@ ul{
   max-height: calc(100%-36px-36px); /*100% cua phan tu cha tuc la chieu cao cua column - chieu cao header- chieu cao footer la ra chieu cao ul*/
   overflow-y: auto;
   
+  
+  
 }
 li{
   background-color: white;
   padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  /*box-shadow:  0 1px 1px black; */
 
 }
