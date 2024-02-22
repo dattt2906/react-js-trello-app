@@ -1,0 +1,7 @@
+.navbar-board{
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    background-color: greenyellow;
+    font-size: 1.1rem;
+  }
