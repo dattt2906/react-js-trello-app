@@ -1,11 +1,15 @@
 
 import './Task.css';
-const Task = () => {
+const Task = (props) => {
+    const {card, cardDel}=props;
+    
+    
     return(
         <>
          <li className= "task-item">
-              <img className="photo" src="https://img.meta.com.vn/Data/image/2021/07/29/sinh-nhat-doraemon-12.jpg"></img>
-              Design and Research
+              {card.title} <i className='fa fa-times'
+                                onClick={()=>cardDel(card)}></i>
+            
             </li>
         
         </>

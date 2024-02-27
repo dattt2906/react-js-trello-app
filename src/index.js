@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './App.css';
+import 'font-awesome/css/font-awesome.min.css';
+ import 'bootstrap/dist/css/bootstrap.min.css';
+ import { v4 as uuidv4 } from 'uuid'; // thu vien dung de quan ly id
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
