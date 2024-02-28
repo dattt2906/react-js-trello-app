@@ -12,6 +12,12 @@ const BoardContent= () =>  {
   const [isAddList, setIsAddList]= useState(false);
   const inputRef= useRef(null);
   const [valueInput, setValueInput]= useState("");
+  const isBoardDataExits = localStorage.getItem("Board");
+
+  if(!isBoardDataExits){
+  const boardInitData = InitData.boards.find(item => item.id === "board-1");
+  localStorage.setItem("Board", JSON.stringify(boardInitData));
+  }
 
 
   useEffect(()=>{
@@ -19,19 +25,22 @@ const BoardContent= () =>  {
       inputRef.current.focus();
     }
 
-  },[isAddList])
+  },[isAddList]);
 
 
   useEffect(() =>{
-    const boardInitData= InitData.boards.find(item=> item.id==="board-1");
-    if(boardInitData){
-      setBoard(boardInitData);
-
+   
+    
+    let data=JSON.parse(localStorage.getItem("Board"));
+   
+    if(data){
+      setBoard(data);
+        console.log(data);
       //sort column
       /*boardInitData.columns.sort((a,b)=>
       boardInitData.columnOrder.indexOf(a.id) - boardInitData.columnOrder.indexOf(b.id)
       ) */
-      setColumns(boardInitData.columns) // doan nay thay cho doan sort o tren do da dinh nghia o trong sort.js
+      setColumns(data.columns) // doan nay thay cho doan sort o tren do da dinh nghia o trong sort.js
 
     }
 
@@ -56,9 +65,10 @@ const BoardContent= () =>  {
       cardOrder:[],
       cards:[]
     });
-    // localStorage.setItem("Column", JSON.stringify(_column));
-    // let data=JSON.parse(localStorage.getItem(Column));
     // console.log(data);
+    let data=JSON.parse(localStorage.getItem("Board"));
+    data.columns=[..._column];
+    localStorage.setItem("Board",JSON.stringify(data));
 
     setColumns(_column);
     setValueInput("");
@@ -70,11 +80,14 @@ const BoardContent= () =>  {
       let newColumns=[...columns];
       const index=newColumns.findIndex(item=>item.id===column.id);
       newColumns.splice(index,1);
+      let data=JSON.parse(localStorage.getItem("Board"));
+    data.columns=[...newColumns];
+    localStorage.setItem("Board",JSON.stringify(data));
       setColumns(newColumns);
 
   }
 
-<input type="file"></input>
+
  
   
 if(_.isEmpty(board)){
@@ -119,15 +132,12 @@ return(
           <div className='btn-cancel'>
               <button className='btn btn-success' onClick={()=> handleAddList()}>Add list</button>
               <i className='fa fa-times' onClick={() =>setIsAddList(false)}></i>
-
-
           </div>
           
 
       </div>
 }
 
- 
       </div>
       
   

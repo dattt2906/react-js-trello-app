@@ -31,8 +31,15 @@ const Column= (props) => {
           title:valueTextArea,
           image:null
 
-
         });
+        let data=JSON.parse(localStorage.getItem("Board"));
+        for(let i = 0  ; i < data.columns.length; i++){
+            if(data.columns[i].id==column.id){
+              data.columns[i].cards=[...addcard];
+            }
+
+        }
+    localStorage.setItem("Board",JSON.stringify(data));
         setCard(addcard);
         console.log(addcard);
         setValueTextArea("");
@@ -60,6 +67,14 @@ const Column= (props) => {
     let newCard=[...Cards];
     const index = newCard.findIndex(item=>item.id===card.id);
     newCard.splice(index,1);
+    let data=JSON.parse(localStorage.getItem("Board"));
+        for(let i = 0  ; i < data.columns.length; i++){
+            if(data.columns[i].id==column.id){
+              data.columns[i].cards=[...newCard];
+            }
+
+        }
+        localStorage.setItem("Board",JSON.stringify(data));
     setCard(newCard);
 
   }
@@ -70,11 +85,9 @@ const Column= (props) => {
         <input className='title-change' type='text'
         value={changeTitle}
         onChange={(event)=>setChangeTitle(event.target.value)}
-        
         ></input>
         <i className='fa fa-times icon-delete'
         onClick={()=>columnDel(column)}
-        
         ></i>
         </header>
           <ul className="task-list">
