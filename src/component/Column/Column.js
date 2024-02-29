@@ -5,10 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import _, { cloneDeep, flatMap } from 'lodash';
 import  Form  from 'react-bootstrap/Form';
+
+
  
 const Column= (props) => {
   const {column,columnDel} = props;
   const cards= column.cards;
+  
  
   const [Cards, setCard]= useState(cards);
   const [valueTextArea, setValueTextArea]=useState("");
@@ -37,10 +40,10 @@ const Column= (props) => {
             if(data.columns[i].id==column.id){
               data.columns[i].cards=[...addcard];
             }
-
         }
     localStorage.setItem("Board",JSON.stringify(data));
         setCard(addcard);
+      
         console.log(addcard);
         setValueTextArea("");
         setIsAddCard(false);
@@ -78,6 +81,10 @@ const Column= (props) => {
     setCard(newCard);
 
   }
+
+
+ 
+
     return(
         <> 
         <div className="column">
@@ -92,13 +99,16 @@ const Column= (props) => {
         </header>
           <ul className="task-list">
             {Cards && Cards.length > 0 && Cards.map((card, index) =>{
+              
               return(
+               
                 <Task
                 key={card.id}
                 card={card}
                 cardDel={()=> cardDel(card)}
-
                 />
+                
+                
               )
 
             })
@@ -133,4 +143,5 @@ const Column= (props) => {
         </>
     )
 }
+
 export default Column;

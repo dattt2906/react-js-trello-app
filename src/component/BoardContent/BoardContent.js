@@ -6,16 +6,24 @@ import _, { cloneDeep } from 'lodash';
 import { mapOrder } from '../../Utilities/sort';  
 import { v4 as uuidv4 } from 'uuid';  
 
-const BoardContent= () =>  {
+
+ const BoardContent= () =>  {
   const [board, setBoard]= useState({});
   const [columns,setColumns]= useState([]);
   const [isAddList, setIsAddList]= useState(false);
   const inputRef= useRef(null);
   const [valueInput, setValueInput]= useState("");
-  const isBoardDataExits = localStorage.getItem("Board");
+  const isBoardDataExits= localStorage.getItem("Board");
+  const [draggedItem,setDraggedItem]= useState(null);
+  
 
+  
+
+
+//neu tren localStorage chua co du lieu duoc luu tru thi moi loc bang va luu len localStograge
   if(!isBoardDataExits){
   const boardInitData = InitData.boards.find(item => item.id === "board-1");
+ 
   localStorage.setItem("Board", JSON.stringify(boardInitData));
   }
 
@@ -98,17 +106,62 @@ if(_.isEmpty(board)){
   )
 }
 
+
+const onDragStart = (e, index)=>{
+
+  
+ setDraggedItem(columns[index]);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/html", e.target);
+    e.dataTransfer.setDragImage(e.target,20,20);
+};
+ 
+ const onDragOver=index =>{
+  
+  
+    const draggedOverItem=columns[index];
+    if(draggedItem===draggedOverItem){
+      return ;
+    }
+
+    let items=columns.filter(item=>item!==draggedItem);
+
+    items.splice(index,0,draggedItem);
+    let data=JSON.parse(localStorage.getItem("Board"));
+    data.columns=[...items];
+    localStorage.setItem("Board",JSON.stringify(data));
+
+    setColumns(items);
+
+
+
+ };
+ const onDragEnd=()=>{
+  console.log("Keo tha da ket thuc");
+
+ }
+//  const onDragEnd = () => {
+//   this.draggedIdx = null;
+// };
+
 return(
     <>
     <div className="board-columns">
       {columns && columns.length > 0 && columns.map((column,index)=>{ /*voi moi phan tu column va index cua no ta se tra ve 1 ptu <Colum> va Prop cua no */
         return(
+          <div 
+          draggable
+         onDragOver={()=>onDragOver(index)} // index truyen vao o day khong lien quan gi den index duoc tao trong than ham onDragOver 
+                                                        //ma tham so index o day chi co tac dung nhan ra phan tu khi ham OnDragStart(index) keo qua 
+         onDragStart={e=> onDragStart(e, index)} //nhan vao index de biet tri so cua phan tu dang duoc keo
+         onDragEnd={onDragEnd}
+                >        
           <Column
           key={column.id}
           column={column}
           columnDel={()=> columnDel(column)} //truyen vao 1 ham xu ly du lieu co tham so duoi dang thuoc tinh cua column
-          
           />
+          </div>
         )
 
       }
